@@ -1,60 +1,50 @@
-#include<stdio.h>
-#include<stdlib.h>
+import java.io.*; 
 
-//function to swap by reference
-void swap(int*a,int*b){
-	int temp;
-	temp=*b;
-	*b=*a;
-	*a=temp;
-	return;
-}
-int* asort(int *a,int n){
-	int low=0,mid=0,high=n-1;   //variables are set
-	
-	while(mid<=high){
-		switch(a[mid]){
-			case 0:     //if a[mid]==0
-				//swap a[low] & a[mid], swapping by reference
-				swap(&a[low],&a[mid]);  
-				low++;      //increment low
-				mid++;      //increment mid
-				break;
-			case 1:     //if a[mid]==1
-				mid++;      //increment mid
-				break;
-			case 2:     //if a[mid]==2
-				//swap a[mid] & a[high], swapping by reference
-				swap(&a[mid],&a[high]);  
-				high--;     //decrement high
-				break;
-		}
-	}
-	//returning adress of array(sorted)
-	return a;   
-}
+class Jimmi41 { 
+	static void printArr(int arr[], int n) 
+	{ 
+		for (int i = 0; i < n; i++) 
+			System.out.print(arr[i] + " "); 
+	} 
+	static void sortArr(int arr[], int n) 
+	{ 
+		int i, cnt0 = 0, cnt1 = 0, cnt2 = 0; 
+		for (i = 0; i < n; i++) { 
+			switch (arr[i]) { 
+			case 0: 
+				cnt0++; 
+				break; 
+			case 1: 
+				cnt1++; 
+				break; 
+			case 2: 
+				cnt2++; 
+				break; 
+			} 
+		} 
+		i = 0; 
+		while (cnt0 > 0) { 
+			arr[i++] = 0; 
+			cnt0--; 
+		} 
+		while (cnt1 > 0) 
+		{ 
+			arr[i++] = 1; 
+			cnt1--; 
+		} 
+		while (cnt2 > 0) { 
+			arr[i++] = 2; 
+			cnt2--; 
+		} 
+		printArr(arr, n); 
+	} 
+	 
+	public static void main(String[] args) 
+	{ 
+		int arr[] = { 0,1,1,2,1,0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 }; 
+		int n = arr.length; 
+		sortArr(arr, n); 
+	} 
+} 
 
-int main() {
-	int n;
-
-	printf("enter no of array elements\n");
-	//input array length
-	scanf("%d",&n);
-
-	int* a=(int*)malloc(sizeof(int)*n);
-
-	printf("enter array elements\n");
-	//input array elements
-	for(int j=0;j<n;j++)      
-		scanf("%d",&a[j]);
-	//array is modified
-	a=asort(a,n);   
-	printf("after being sorted..............\n");
-	//printing the sorted array
-	for(int j=0;j<n-1;j++)   
-		printf("%d ",a[j]);
-	
-	printf("%d\n",a[n-1]);
-
-	return 0;
-}
+// This code is contributed by jimmi41 
